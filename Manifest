@@ -1,0 +1,12 @@
+lib/anyqueue/message.rb
+lib/anyqueue/provider.rb
+lib/anyqueue/providers/file_provider.rb
+lib/anyqueue/providers/sqs_provider.rb
+Rakefile
+README.rdoc
+test/file_message_test.rb
+test/file_provider_test.rb
+test/provider_test.rb
+test/sqs_message_test.rb
+test/sqs_provider_test.rb
+Manifest
