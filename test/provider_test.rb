@@ -37,5 +37,12 @@ module AnyQueue
         provider.reserve
       end
     end
+    
+    test "that pushing raises an exception because it's not implemented" do
+      provider = TestProviderWithNew.new({})
+      assert_raises RuntimeError do
+        provider.push("Test Message")
+      end
+    end
   end
 end

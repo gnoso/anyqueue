@@ -20,6 +20,15 @@ module AnyQueue
       raise "Not Implemented!"
     end
   
+    # Pushes a message onto the queue that this provider is connected to.
+    #
+    # ==== Parameters
+    # message<String>:: The content to be pushed as a message to the queue.
+    def push(message)
+      raise "Not Implemented!"
+    end
+    alias :<< :push
+  
     # Registers a class with a particular type of provider in AnyQueue.
     #
     # ==== Parameters
