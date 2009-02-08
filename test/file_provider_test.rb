@@ -36,5 +36,17 @@ module AnyQueue
       
       assert_equal msg, provider.receive.body
     end
+    
+    test "that pushing a message works with << syntax" do
+      provider = FileProvider.new({ :queue_file => @queue_file })
+      
+      msg = test_message
+      provider << msg
+      4.times do
+        provider.receive
+      end
+      
+      assert_equal msg, provider.receive.body
+    end
   end
 end

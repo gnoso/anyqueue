@@ -27,7 +27,14 @@ module AnyQueue
     def push(message)
       raise "Not Implemented!"
     end
-    alias :<< :push
+
+    # Alias for push
+    #
+    # ==== Parameters
+    # message<String>:: The content to be pushed as a message to the queue.
+    def <<(message)
+      push message
+    end
   
     # Registers a class with a particular type of provider in AnyQueue.
     #
