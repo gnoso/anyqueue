@@ -13,24 +13,14 @@ module AnyQueue
       msg = certain_receive
       
       assert_equal @right_msg.id, msg.id
+      msg.delete
     end
     
     test "that body is returned correctly" do
       msg = certain_receive
       
-      assert_equal YAML::dump(test_message), msg.body
-    end
-    
-    test "that data works correctly" do
-      msg = certain_receive
-      
-      assert_equal test_message, msg.data
-    end
-    
-    test "that type is returned correctly" do
-      msg = certain_receive
-      
-      assert_equal test_message[:type], msg.type
+      assert_equal @right_msg.body, msg.body
+      msg.delete
     end
     
     test "that deleting a message works correctly" do

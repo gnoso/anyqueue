@@ -3,7 +3,7 @@ require 'test/test_helper'
 module AnyQueue
   class FileProviderTest < Test::Unit::TestCase
     def setup
-      @queue_file = File.join(File.dirname(__FILE__), "test_apps", "logger",
+      @queue_file = File.join(File.dirname(__FILE__), "fixtures",
           "queue.yml")
     end
     
@@ -22,7 +22,7 @@ module AnyQueue
       
       assert_nil provider.receive
       
-      assert_equal "Message 1", messages[0].data["message"]
+      assert_equal "Message 1", messages[0].body
     end
   end
 end

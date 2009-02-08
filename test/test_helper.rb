@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/cavort'
+require 'lib/anyqueue'
 
 class Test::Unit::TestCase
   # test "verify something" do
@@ -35,17 +35,13 @@ class Test::Unit::TestCase
     @@sqs_queue ||= @@sqs.queue(sqs_queue_config['queue'])
   end
   
-  # Returns a test message as a hash.
+  # Returns a test message as a string.
   def test_message
-    {
-      :type => "Test",
-      :foo => "bar",
-      :monkey => "awesome"
-    }
+    "Test Message- #{UUID.random_create.to_s}"
   end
   
   # Posts a test message to an sqs queue
   def sqs_post_test_message
-    sqs_queue.send_message(YAML::dump(test_message))
+    sqs_queue.send_message(test_message)
   end
 end

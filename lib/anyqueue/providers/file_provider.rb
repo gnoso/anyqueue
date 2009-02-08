@@ -17,15 +17,7 @@ module AnyQueue
     # ==== Returns
     # String:: The body of the message.
     def body
-      YAML::dump(@base_message)
-    end
-    
-    # Returns the data for this message.
-    # 
-    # ==== Returns
-    # Hash:: The data as parsed as YAML from the message.
-    def data
-      return @base_message
+      @base_message
     end
     
     # Does nothing in the file message handler, because the file provider
