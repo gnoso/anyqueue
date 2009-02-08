@@ -24,5 +24,17 @@ module AnyQueue
       
       assert_equal "Message 1", messages[0].body
     end
+    
+    test "that pushing a message works" do
+      provider = FileProvider.new({ :queue_file => @queue_file })
+      
+      msg = test_message
+      provider.push(msg)
+      4.times do
+        provider.receive
+      end
+      
+      assert_equal msg, provider.receive.body
+    end
   end
 end

@@ -52,5 +52,10 @@ module AnyQueue
         return nil
       end
     end
+   
+    # Pushes a message to the queue.
+    def push(msg)
+      @queue_data << msg
+    end
   end
 end
