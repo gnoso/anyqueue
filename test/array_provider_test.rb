@@ -49,5 +49,11 @@ module AnyQueue
       
       assert_equal msg, provider.receive.body
     end
+    
+    test "that initializing an array provider with no data works" do
+      provider = ArrayProvider.new
+      
+      assert provider.to_a.empty?
+    end
   end
 end

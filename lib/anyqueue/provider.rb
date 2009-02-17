@@ -47,7 +47,7 @@ module AnyQueue
     end
   
     # Returns a new instance of a provider with the type given.
-    def self.provider(type, config)
+    def self.provider(type, config = nil)
       @@registered_providers[type].new(config)
     end
   end

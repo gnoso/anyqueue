@@ -36,8 +36,8 @@ module AnyQueue
     #
     # ==== Raises
     # RuntimeError:: If the file given isn't correct.
-    def initialize(config)
-      @queue_data = config
+    def initialize(config = nil)
+      @queue_data = config || []
       @queue_index = 0
     end
     
@@ -55,6 +55,11 @@ module AnyQueue
     # Pushes a message to the queue.
     def push(msg)
       @queue_data << msg
+    end
+    
+    # Returns an array representing the data in this queue.
+    def to_a
+      @queue_data
     end
   end
 end
