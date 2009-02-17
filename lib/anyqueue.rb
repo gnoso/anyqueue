@@ -1,3 +1,5 @@
+require 'uuidtools'
+
 require 'anyqueue/provider'
 require 'anyqueue/message'
 

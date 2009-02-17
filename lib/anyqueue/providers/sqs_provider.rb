@@ -59,5 +59,13 @@ module AnyQueue
       
       SqsMessage.new(base_msg)
     end
+    
+    # Pushes a message to the queue
+    #
+    # ==== Parameters
+    # message<String>:: The message to push to the queue
+    def push(message)
+      @queue.send_message(message)
+    end
   end
 end

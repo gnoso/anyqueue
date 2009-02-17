@@ -1,5 +1,3 @@
-require 'uuidtools'
-
 module AnyQueue
   module Message
     # Returns the full body of the message from the queue.
