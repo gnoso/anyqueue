@@ -20,8 +20,7 @@ module AnyQueue
       @base_message
     end
     
-    # Does nothing in the file message handler, because the file provider
-    # just works sequentially through the file.
+    # Does nothing in the array handler, because it always just deletes.
     def delete
     end
   end
@@ -33,22 +32,16 @@ module AnyQueue
     
     # Initializes the provider. See AnyQueue::Provider#initialize for
     # more information.
-    #
-    # ==== Raises
-    # RuntimeError:: If the file given isn't correct.
     def initialize(config = nil)
       @queue_data = config || []
-      @queue_index = 0
     end
     
     # Receives a message from the queue
     def receive
-      if @queue_index < @queue_data.length
-        msg = ArrayMessage.new(@queue_data[@queue_index])
-        @queue_index += 1
-        return msg
+      if @queue_data.empty?
+        nil
       else
-        return nil
+        ArrayMessage.new(@queue_data.delete_at(0))
       end
     end
    
