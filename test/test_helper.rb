@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'lib/anyqueue'
+require File.dirname(__FILE__) + '/../lib/anyqueue'
 
 class Test::Unit::TestCase
   # test "verify something" do
