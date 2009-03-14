@@ -1,31 +1,6 @@
 require 'right_aws'
 
 module AnyQueue
-  class SqsMessage
-    include AnyQueue::Message
-    
-    # Initializes a new message.
-    #
-    # ==== Parameters
-    # message<Right::Sqs::Message>:: A message from the queue
-    def initialize(base_message)
-      @base_message = base_message
-    end
-    
-    # Returns the raw body of the SQS message.
-    #
-    # ==== Returns
-    # String:: The body of the SQS message.
-    def body
-      @base_message.body
-    end
-    
-    # Deletes this message from the queue.
-    def delete
-      @base_message.delete
-    end
-  end
-  
   class SqsProvider
     include Provider
     
@@ -46,10 +21,11 @@ module AnyQueue
     # Receives a message from the queue
     def receive
       base_msg = @queue.receive
-      
-      return nil if !base_msg
-      
-      SqsMessage.new(base_msg)
+      if block_given?
+        body = base_msg ? base_msg.body : nil
+        result = yield body
+      end
+      base_msg.delete if base_msg && result
     end
     
     # Pushes a message to the queue

@@ -12,15 +12,31 @@ module AnyQueue
       
       # test receiving a message from the queue
       provider = SqsProvider.new(sqs_queue_config)
-      msg = nil
+      result = nil
       
       10.times do
-        msg = provider.receive
-        break if msg
+        provider.receive do |msg|
+          result = msg
+        end
+        break if result
       end
       
       # make sure we got something back
-      assert_not_nil msg
+      assert_not_nil result
+    end
+    
+    test "that messages are properly deleted from the queue" do
+      sqs_post_test_message
+      
+      provider = SqsProvider.new(sqs_queue_config)
+      found = nil
+      10.times do
+        provider.receive do |msg|
+          found = msg
+          true
+        end
+        break if found
+      end
     end
     
     test "that we can push to a queue" do

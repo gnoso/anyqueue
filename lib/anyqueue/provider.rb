@@ -10,13 +10,12 @@ module AnyQueue
       raise "Not implemented!"
     end
   
-    # Reserves a message in the queue and returns a AnyQueue::Message,
-    # or nil if no messages are available in the queue.
-    # 
-    # ==== Returns
-    # AnyQueue::Message:: The next message from the queue, or nil if no
-    #   messages are in the queue.
-    def reserve
+    # Receives a message from the queue.
+    #
+    # Expects a block that will receive the message as a parameter. The
+    # block should return true if the message should be removed from the
+    # queue or false if it should not.
+    def receive
       raise "Not Implemented!"
     end
   
