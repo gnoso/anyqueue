@@ -9,13 +9,6 @@ module AnyQueue
       @provider = SqsProvider.new(sqs_queue_config)
     end
     
-    test "that id is returned correctly" do
-      msg = certain_receive
-      
-      assert_equal @right_msg.id, msg.id
-      msg.delete
-    end
-    
     test "that body is returned correctly" do
       msg = certain_receive
       

@@ -12,14 +12,6 @@ module AnyQueue
       @base_message = base_message
     end
     
-    # Returns the SQS id of the message.
-    #
-    # ==== Returns
-    # String:: The SQS id of the message
-    def id
-      @base_message.id
-    end
-    
     # Returns the raw body of the SQS message.
     #
     # ==== Returns
