@@ -1,30 +1,4 @@
-module AnyQueue
-  class ArrayMessage
-    include AnyQueue::Message
-    
-    # Initializes a new message.
-    #
-    # ==== Parameters
-    # base_message<String>:: The body of the message from the queue
-    def initialize(base_message)
-      @base_message = base_message
-    end
-    
-    # Returns the raw body of the message. This is a bit sloppy for now
-    # because we're actually converting the hash that we loaded back into
-    # YAML.
-    #
-    # ==== Returns
-    # String:: The body of the message.
-    def body
-      @base_message
-    end
-    
-    # Does nothing in the array handler, because it always just deletes.
-    def delete
-    end
-  end
-  
+module AnyQueue  
   class ArrayProvider
     include AnyQueue::Provider
     
@@ -37,11 +11,18 @@ module AnyQueue
     end
     
     # Receives a message from the queue
+    # Expects a block that will receive the message as a parameter. The
+    # block should return true if the message should be removed from the
+    # queue or false if it should not.
     def receive
       if @queue_data.empty?
         nil
       else
-        ArrayMessage.new(@queue_data.delete_at(0))
+        msg = @queue_data.delete_at(0)
+        if block_given?
+          result = yield msg
+        end
+        @queue_data << msg if !result
       end
     end
    

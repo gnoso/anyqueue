@@ -8,7 +8,7 @@ module AnyQueue
         ]
     end
     
-    test "that the file provider is registered" do
+    test "that the provider is registered" do
       assert_not_nil AnyQueue::Provider.provider("array", 
         @queue_data)
     end
@@ -18,36 +18,56 @@ module AnyQueue
       
       messages = []
       4.times do
-        messages << provider.receive
+        provider.receive do |msg|
+          messages << msg
+          true
+        end
       end
       
-      assert_nil provider.receive
+      assert_equal "Message 1", messages[0]
+    end
+    
+    test "that messages are deleted from the queue correctly" do
+      provider = ArrayProvider.new(@queue_data)
       
-      assert_equal "Message 1", messages[0].body
+      4.times do
+        provider.receive do |msg|
+          true
+        end
+      end
+      
+      # this should be nil, since we cleared everything out
+      provider.receive do |msg|
+        assert_nil msg
+      end
     end
     
     test "that pushing a message works" do
       provider = ArrayProvider.new(@queue_data)
       
-      msg = test_message
-      provider.push(msg)
+      expected = test_message
+      provider.push(expected)
       4.times do
         provider.receive
       end
       
-      assert_equal msg, provider.receive.body
+      provider.receive do |msg|
+        assert_equal expected, msg
+      end
     end
     
     test "that pushing a message works with << syntax" do
       provider = ArrayProvider.new(@queue_data)
       
-      msg = test_message
-      provider << msg
+      expected = test_message
+      provider << expected
       4.times do
         provider.receive
       end
       
-      assert_equal msg, provider.receive.body
+      provider.receive do |msg|
+        assert_equal expected, msg
+      end
     end
     
     test "that initializing an array provider with no data works" do
