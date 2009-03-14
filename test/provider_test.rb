@@ -31,10 +31,10 @@ module AnyQueue
       end
     end
     
-    test "that reserving a message raises an exception because it's not implemented" do
+    test "that receiving a message raises an exception because it's not implemented" do
       provider = TestProviderWithNew.new({})
       assert_raises RuntimeError do
-        provider.reserve
+        provider.receive
       end
     end
     

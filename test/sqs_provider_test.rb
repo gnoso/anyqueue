@@ -25,6 +25,7 @@ module AnyQueue
       assert_not_nil result
     end
     
+    # TODO: Figure out how to test this properly
     test "that messages are properly deleted from the queue" do
       sqs_post_test_message
       
