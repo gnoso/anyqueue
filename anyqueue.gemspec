@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{AnyQueue is a queue abstraction layer.}
   spec.summary       = %q{A queue abstraction layer.}
   spec.homepage      = "https://github.com/gnoso/anyqueue"
-  spec.license       = "MIT"
+  spec.license       = "Apache License 2.0"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
