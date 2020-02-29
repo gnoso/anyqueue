@@ -18,7 +18,7 @@ GEM
     gemcutter (0.7.1)
     json (1.8.0)
     json_pure (1.8.0)
-    rake (10.0.4)
+    rake (13.0.1)
     rdoc (4.0.1)
       json (~> 1.4)
     rubyforge (2.0.4)
